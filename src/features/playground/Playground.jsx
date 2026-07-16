@@ -2,13 +2,20 @@ import { useState, useEffect, useRef } from 'react';
 import convertToAscii from '../../lib/asciiConverter';
 import './Playground.css'
 
+import usePlaygroundStore from '../../store/playgroundStore';
+
 export default function Playground() {
     const [imageSrc, setImageSrc] = useState(null);
-    const [width, setWidth] = useState(100);
-    const [contrast, setContrast] = useState(1);
-    const [brightness, setBrightness] = useState(1);
-    const [invert, setInvert] = useState(false);
-    const [characterSet, setCharacterSet] = useState('standard');
+    const width = usePlaygroundStore((state) => state.width);
+    const setWidth = usePlaygroundStore((state) => state.setWidth);
+    const contrast = usePlaygroundStore((state) => state.contrast);
+    const setContrast = usePlaygroundStore((state) => state.setContrast);
+    const brightness = usePlaygroundStore((state) => state.brightness);
+    const setBrightness = usePlaygroundStore((state) => state.setBrightness);
+    const invert = usePlaygroundStore((state) => state.invert);
+    const setInvert = usePlaygroundStore((state) => state.setInvert);
+    const characterSet = usePlaygroundStore((state) => state.characterSet);
+    const setCharacterSet = usePlaygroundStore((state) => state.setCharacterSet);
     const [asciiOutput, setAsciiOutput] = useState([]);
 
     const canvasRef = useRef(null);
@@ -46,19 +53,6 @@ export default function Playground() {
     return (
         <div className="playground">
             <input type="file" onChange={handleFileUpload} />
-            <label htmlFor="width">Width:</label>
-            <input type="range" min="50" max="200" value={width} onChange={(e) => setWidth(parseInt(e.target.value))} />
-            <label htmlFor="contrast">Contrast:</label>
-            <input type="range" min="0.1" max="2" step="0.1" value={contrast} onChange={(e) => setContrast(parseFloat(e.target.value))} />
-            <label htmlFor="brightness">Brightness:</label>
-            <input type="range" min="-100" max="100" step="0.1" value={brightness} onChange={(e) => setBrightness(parseFloat(e.target.value))} />
-            <label htmlFor="invert">Invert:</label>
-            <input type="checkbox" checked={invert} onChange={(e) => setInvert(e.target.checked)} />
-            <label htmlFor="characterSet">Character Set:</label>
-            <select id="characterSet" value={characterSet} onChange={(e) => setCharacterSet(e.target.value)}>
-                <option value="standard">Standard</option>
-                <option value="blocks">Blocks</option>
-            </select>
             <canvas ref={canvasRef} style={{ display: 'none' }} />
             <pre>{asciiOutput.join('\n')}</pre>
         </div>

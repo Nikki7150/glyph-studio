@@ -1,9 +1,9 @@
-import Playground from './features/playground/Playground.jsx';
+import Monitor from './layout/Monitor';
 
 function App() {
     return (
         <div className="App">
-            <Playground />
+            <Monitor />
         </div>
     );
 }
