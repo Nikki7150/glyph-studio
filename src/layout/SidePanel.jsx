@@ -15,12 +15,13 @@ function SidePanel() {
 
     return (
         <div className="side-panel">
+            
             <label htmlFor="width">Width:</label>
-            <input type="range" min="50" max="200" value={width} onChange={(e) => setWidth(parseInt(e.target.value))} />
+            <input type="range" min="50" max="200" value={width} onChange={(e) => setWidth(parseInt(e.target.value))} className="generator-input" />
             <label htmlFor="contrast">Contrast:</label>
-            <input type="range" min="0.1" max="2" step="0.1" value={contrast} onChange={(e) => setContrast(parseFloat(e.target.value))} />
+            <input type="range" min="0.1" max="2" step="0.1" value={contrast} onChange={(e) => setContrast(parseFloat(e.target.value))} className="generator-input" />
             <label htmlFor="brightness">Brightness:</label>
-            <input type="range" min="-100" max="100" step="0.1" value={brightness} onChange={(e) => setBrightness(parseFloat(e.target.value))} />
+            <input type="range" min="-100" max="100" step="0.1" value={brightness} onChange={(e) => setBrightness(parseFloat(e.target.value))} className="generator-input" />
             <label htmlFor="invert">Invert:</label>
             <input type="checkbox" checked={invert} onChange={(e) => setInvert(e.target.checked)} />
             <label htmlFor="characterSet">Character Set:</label>
