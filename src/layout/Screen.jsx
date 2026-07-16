@@ -1,5 +1,6 @@
 import "./Monitor.css";
 import Playground from '../features/playground/Playground.jsx';
+import { Outlet } from 'react-router-dom';
 
 function Screen() {
     return (
@@ -7,7 +8,7 @@ function Screen() {
             <div className="screen-bezel">
                 <div className="screen-glass">
                     <div className="screen-content">
-                        <Playground />
+                        <Outlet />
                     </div>
                 </div>
             </div>

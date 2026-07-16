@@ -69,6 +69,8 @@ export default function Playground() {
 
     return (
         <div className="playground">
+            <h1 className="playground-heading">Playground</h1>
+            <div className="divider"></div>
             <input type="file" onChange={handleFileUpload} className="image-file-input" />
             <canvas ref={canvasRef} style={{ display: 'none' }} />
             {log.length === 0 && asciiOutput.length === 0 && (
@@ -89,6 +91,40 @@ export default function Playground() {
             {asciiOutput.length > 0 && (
                 <pre>{asciiOutput.join('\n')}</pre>
             )}
+        </div>
+    );
+}
+
+export function PlaygroundPanel() {
+    const width = usePlaygroundStore((state) => state.width);
+    const setWidth = usePlaygroundStore((state) => state.setWidth);
+    const contrast = usePlaygroundStore((state) => state.contrast);
+    const setContrast = usePlaygroundStore((state) => state.setContrast);
+    const brightness = usePlaygroundStore((state) => state.brightness);
+    const setBrightness = usePlaygroundStore((state) => state.setBrightness);
+    const invert = usePlaygroundStore((state) => state.invert);
+    const setInvert = usePlaygroundStore((state) => state.setInvert);
+    const characterSet = usePlaygroundStore((state) => state.characterSet);
+    const setCharacterSet = usePlaygroundStore((state) => state.setCharacterSet);
+
+    return (
+        <div className="playground-panel">
+            <h2 className="play-panel-heading">ASCII Art Settings</h2>
+            <div className="playground-controls">
+                <label htmlFor="width">Width: {width}</label>
+                <input type="range" min="50" max="200" value={width} onChange={(e) => setWidth(parseInt(e.target.value))} />
+                <label htmlFor="contrast">Contrast: {contrast}</label>
+                <input type="range" min="0.1" max="2" step="0.1" value={contrast} onChange={(e) => setContrast(parseFloat(e.target.value))} />
+                <label htmlFor="brightness">Brightness: {brightness}</label>
+                <input type="range" min="-100" max="100" step="0.1" value={brightness} onChange={(e) => setBrightness(parseFloat(e.target.value))} />
+                <label htmlFor="invert">Invert: {invert ? 'Yes' : 'No'}</label>
+                <input type="checkbox" checked={invert} onChange={(e) => setInvert(e.target.checked)} />
+                <label htmlFor="characterSet">Character Set:</label>
+                <select id="characterSet" value={characterSet} onChange={(e) => setCharacterSet(e.target.value)}>
+                    <option value="standard">Standard</option>
+                    <option value="blocks">Blocks</option>
+                </select>
+            </div>
         </div>
     );
 }

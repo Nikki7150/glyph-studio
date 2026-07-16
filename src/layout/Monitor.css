@@ -85,16 +85,78 @@
 .side-panel {
     width: 350px;
     border-radius: 20px;
-    background: linear-gradient(160deg, #2a2a2a 0%, #151515 100%);
+    background: linear-gradient(160deg, #101010f4 0%, #111111f7 100%);
     box-shadow:
-        inset 0 2px 4px rgba(255, 255, 255, 0.05),
-        inset 0 -2px 6px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
+        inset 0 2px 4px rgb(102, 102, 102),
+        inset 0 -2px 6px rgb(31, 31, 31);
+    color: #cdcdcd;
     font-family: 'Courier New', monospace;
 }
 
 input[type="range"] {
     accent-color: #ffffff;
+    cursor: pointer;
+}
+
+.play-panel-heading {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    background-color: #1b1b1b;
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid rgb(20, 20, 20);
+}
+
+.playground-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    background-color: #1b1b1b;
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid rgb(20, 20, 20);
+    width: 250px;
+}
+
+input[type="checkbox"] {
+    accent-color: #3c3c3c; 
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#characterSet {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #242424;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#characterSet:focus {
+    border-color: #0f0f0f;
+}
+
+#characterSet::after {
+    content: "";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #666;
+    pointer-events: none;
 }
 
 /*-------------------------------------------------------- PLAYGROUND.JSX--------------------------------------------------------*/
@@ -106,7 +168,7 @@ input[type="range"] {
     border: dashed 2px #6fff8f;
     border-radius: 22px;
     cursor: pointer;
-    height: 710px;
+    height: 650px;
     padding: 20px;
     margin: 30px;
     display: flex;
@@ -143,4 +205,20 @@ input[type="range"] {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #80af8a;
+}
+
+.playground-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.playground-heading {
+    margin: 20px
+}
+
+.divider {
+    border: dashed 2px #6fff8f;
 }
