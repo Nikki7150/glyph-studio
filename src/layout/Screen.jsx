@@ -1,5 +1,4 @@
 import "./Monitor.css";
-import Playground from '../features/playground/Playground.jsx';
 import { Outlet } from 'react-router-dom';
 
 function Screen() {
