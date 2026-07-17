@@ -43,7 +43,7 @@ export default function Home() {
                     <h2>LEARN. EXPERIMENT. CREATE.</h2>
                     <p>This is the home page content.</p>
                 </div>
-                <h3 className="text-xl font-bold">## Features</h3>
+                <h3 className="feature-heading text-xl font-bold">## Features</h3>
                 <div className="card-holder">
                     <div className="card-grid">
                         <div className="card" onClick={() => navigate('/playground')}>

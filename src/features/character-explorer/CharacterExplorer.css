@@ -1,0 +1,38 @@
+.character-explorer-heading {
+    margin: 20px
+}
+
+.divider {
+    border: dashed 2px #6fff8f;
+}
+
+.character-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    background: rgba(111, 255, 143, 0.05);
+    border: 1px solid rgba(111, 255, 143, 0.2);
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.character-tile:hover {
+    background-color: rgba(111, 255, 143, 0.15);
+}
+
+.character-tile.selected {
+    background: #6fff8f;
+    color: #050805;
+    font-weight: bold;
+}
+
+.character-explorer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    padding: 1rem;
+}

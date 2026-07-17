@@ -41,3 +41,14 @@ export const characterCoverageMap = characters.reduce((acc, character) => {
     acc[character] = calculateCoverage(character);
     return acc;
 }, {});
+
+export function getNearestCoverageNeighbor(selectedCharacter, count = 3) {
+    const target = characterCoverageMap[selectedCharacter];
+
+    const candidates = Object.entries(characterCoverageMap)
+        .filter(([character]) => character !== selectedCharacter)
+        .map(([character, coverage]) => ({ character, coverage, distance: Math.abs(coverage - target) }))
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, count);
+    return candidates;
+}
