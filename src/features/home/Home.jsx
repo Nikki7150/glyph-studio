@@ -1,4 +1,6 @@
 import './Home.css'
+import { FaPen, FaCamera, FaImages, FaSlidersH, FaSearch } from 'react-icons/fa';
+import { MdCompare } from "react-icons/md";
 
 export default function Home() {
     const heroAscii = `@@@@@%#*=-::::::::::--=+*##%%%###########%%%@@@%%%%@@@@@@@@@@@@@@@%%%%%%%####****+++++++=======++++***###%%%%%%%%%%%%%%%
@@ -41,30 +43,48 @@ export default function Home() {
                 <div className="card-holder">
                     <div className="card-grid">
                         <div className="card">
-                            <h3>Playground</h3>
-                            <p>Content for card 1.</p>
+                            <div className="card-icon">
+                                <FaSlidersH size="2em" />
+                            </div>
+                            <h3>PLAYGROUND</h3>
+                            <p>Upload your image and experiment with the different tools in real time.</p>
                         </div>
                         <div className="card">
-                            <h3>Character Explorer</h3>
-                            <p>Content for card 2.</p>
+                            <div className="card-icon">
+                                <FaSearch size="2em" />
+                            </div>
+                            <h3>CHARACTER EXPLORER</h3>
+                            <p>Explore how each ASCII character works , compare densities, and learn where each one shines.</p>
                         </div>
                         <div className="card">
-                            <h3>Draw</h3>
-                            <p>Content for card 3.</p>
+                            <div className="card-icon">
+                                <FaPen size="2em" />
+                            </div>
+                            <h3>DRAWING MODE</h3>
+                            <p>Create ASCII art from scratch by painting directly with characters on the canvas.</p>
                         </div>
                     </div>
                     <div className="card-grid">
                         <div className="card">
-                            <h3>Live Camera</h3>
-                            <p>Content for card 4.</p>
+                            <div className="card-icon">
+                                <FaCamera size="2em" />
+                            </div>
+                            <h3>LIVE CAMERA</h3>
+                            <p>Turn your webcam into live ASCII art and adjust settings as you watch it update.</p>
                         </div>
                         <div className="card">
-                            <h3>Compare Mode</h3>
-                            <p>Content for card 5.</p>
+                            <div className="card-icon">
+                                <MdCompare size="2em" />
+                            </div>
+                            <h3>COMPARE MODE</h3>
+                            <p>See exactly how pixels are converted into ASCII characters by comparing side by side.</p>
                         </div>
                         <div className="card">
-                            <h3>Gallery</h3>
-                            <p>Content for card 6.</p>
+                            <div className="card-icon">
+                                <FaImages size="2em" />
+                            </div>
+                            <h3>GALLERY</h3>
+                            <p>Browse your creations, inspect the settings and add more creations.</p>
                         </div>
                     </div>
                 </div>
