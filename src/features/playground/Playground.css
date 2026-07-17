@@ -1,6 +1,63 @@
-body {
-    margin: 0;
-    padding: 0;
-    color: #000;
-    background-color: #fff;
+/*-------------------------------------------------------- PLAYGROUND.JSX--------------------------------------------------------*/
+.image-file-input {
+    display: none;
+}
+
+.image-upload {
+    border: dashed 2px #6fff8f;
+    border-radius: 22px;
+    cursor: pointer;
+    height: 650px;
+    padding: 20px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-upload label {
+    cursor: pointer;
+    border: dashed 2px #6fff8f;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 2rem;
+}
+
+/* Custom scrollbar for all scrollbars */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #c0f0ca #000000;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #000000;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: #c0f0ca;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #80af8a;
+}
+
+.playground-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.playground-heading {
+    margin: 20px
+}
+
+.divider {
+    border: dashed 2px #6fff8f;
 }

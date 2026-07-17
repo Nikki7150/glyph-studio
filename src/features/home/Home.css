@@ -1,0 +1,75 @@
+.home {
+    padding: 1px;
+}
+
+.nav-bar {
+    padding: 15px;
+    border-bottom: dashed 1px #6fff8f;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 380px;
+    background: #050805; /* dark base so the ASCII glows on top */
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #6fff8f;
+    font-size: 1.4rem;
+}
+
+.hero-ascii-bg {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1;
+    color: rgba(180, 255, 225, 0.35); /* dim, matches the cool blue tone in your image */
+    white-space: pre;
+    overflow: hidden;
+    letter-spacing: 1px;
+}
+
+.card-holder {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.card-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    background: #050805;
+    border: 1px solid #6fff8f;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(183, 133, 133, 0.5);
+    height: 400px;
+    width: 280px;
+}
+
+.text-xl {
+    margin-left: 160px;
+    margin-right: 160px;
+    margin-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px dotted #6fff8f;
+}

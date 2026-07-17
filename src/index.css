@@ -3,3 +3,16 @@ html, body {
     margin: 0;
     overflow: hidden;
 }
+
+@import "tailwindcss";
+
+:root {
+    line-height: 1.5;
+    font-weight: bold;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: none;
+    overflow: hidden;
+}
