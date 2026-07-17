@@ -3,6 +3,7 @@ import convertToAscii from '../../lib/asciiConverter';
 import './Playground.css'
 
 import usePlaygroundStore from '../../store/playgroundStore';
+import { useNavigate } from 'react-router-dom';
 
 export default function Playground() {
     const [log, setLog] = useState([]);
@@ -69,7 +70,7 @@ export default function Playground() {
 
     return (
         <div className="playground">
-            <h1 className="playground-heading">Playground</h1>
+            <h1 className="playground-heading text-xl font-bold">Playground</h1>
             <div className="divider"></div>
             <input type="file" onChange={handleFileUpload} className="image-file-input" />
             <canvas ref={canvasRef} style={{ display: 'none' }} />
@@ -106,10 +107,12 @@ export function PlaygroundPanel() {
     const setInvert = usePlaygroundStore((state) => state.setInvert);
     const characterSet = usePlaygroundStore((state) => state.characterSet);
     const setCharacterSet = usePlaygroundStore((state) => state.setCharacterSet);
+    const navigate = useNavigate();
 
     return (
         <div className="playground-panel">
-            <h2 className="play-panel-heading">ASCII Art Settings</h2>
+            <button onClick={() => navigate('/')}>Back</button>
+            <h2 className="play-panel-heading text-xl font-bold">ASCII Art Settings</h2>
             <div className="playground-controls">
                 <label htmlFor="width">Width: {width}</label>
                 <input type="range" min="50" max="200" value={width} onChange={(e) => setWidth(parseInt(e.target.value))} />

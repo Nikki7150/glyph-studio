@@ -1,6 +1,7 @@
 import './Home.css'
 import { FaPen, FaCamera, FaImages, FaSlidersH, FaSearch } from 'react-icons/fa';
 import { MdCompare } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
     const heroAscii = `@@@@@%#*=-::::::::::--=+*##%%%###########%%%@@@%%%%@@@@@@@@@@@@@@@%%%%%%%####****+++++++=======++++***###%%%%%%%%%%%%%%%
@@ -27,7 +28,10 @@ export default function Home() {
 ::::::::::::::::::::--=++*##%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*=-=#%@@#+-=#%@@@@@@@@@@@%*=--=+#%%
 :::::::::::::::::::::::::--=++*##%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#+--=*%@@%*==*%@@@@@@@@@@@@%#+--=+#%@
 ::::::::::::::::::::::::::::::--==+**##%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#*=--=*%@@@#+=+#@@@@@@@@@@@@@%#+--=+#%@
---:::::::::::::::::::::----::::::::--==++**##%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#+=-:=*%@@@%*==*%@@@@@@@@@@@@@%#+--=+#%@`
+--:::::::::::::::::::::----::::::::--==++**##%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#+=-:=*%@@@%*==*%@@@@@@@@@@@@@%#+--=+#%@`;
+
+    const navigate = useNavigate();
+
     return (
         <div className="home">
             <div className="nav-bar">
@@ -42,21 +46,21 @@ export default function Home() {
                 <h3 className="text-xl font-bold">## Features</h3>
                 <div className="card-holder">
                     <div className="card-grid">
-                        <div className="card">
+                        <div className="card" onClick={() => navigate('/playground')}>
                             <div className="card-icon">
                                 <FaSlidersH size="2em" />
                             </div>
                             <h3>PLAYGROUND</h3>
                             <p>Upload your image and experiment with the different tools in real time.</p>
                         </div>
-                        <div className="card">
+                        <div className="card" onClick={() => navigate('/character-explorer')}>
                             <div className="card-icon">
                                 <FaSearch size="2em" />
                             </div>
                             <h3>CHARACTER EXPLORER</h3>
                             <p>Explore how each ASCII character works , compare densities, and learn where each one shines.</p>
                         </div>
-                        <div className="card">
+                        <div className="card" onClick={() => navigate('/drawing-mode')}>
                             <div className="card-icon">
                                 <FaPen size="2em" />
                             </div>
@@ -65,21 +69,21 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="card-grid">
-                        <div className="card">
+                        <div className="card" onClick={() => navigate('/live-camera')}>
                             <div className="card-icon">
                                 <FaCamera size="2em" />
                             </div>
                             <h3>LIVE CAMERA</h3>
                             <p>Turn your webcam into live ASCII art and adjust settings as you watch it update.</p>
                         </div>
-                        <div className="card">
+                        <div className="card" onClick={() => navigate('/compare-mode')}>
                             <div className="card-icon">
                                 <MdCompare size="2em" />
                             </div>
                             <h3>COMPARE MODE</h3>
                             <p>See exactly how pixels are converted into ASCII characters by comparing side by side.</p>
                         </div>
-                        <div className="card">
+                        <div className="card" onClick={() => navigate('/gallery')}>
                             <div className="card-icon">
                                 <FaImages size="2em" />
                             </div>

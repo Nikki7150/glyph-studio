@@ -1,9 +1,7 @@
 export default function convertToAscii (imageData, options) {
-  // imageData: pixel data already resized to target width/height
   const {width, height, data} = imageData;
   const { contrast, brightness, invert, characterSet } = options;
   const rows = [];
-  // options: { contrast, brightness, invert, characterSet }
   for (let y = 0; y < height; y++) {
     let row = '';
     for (let x = 0; x < width; x++) {
