@@ -9,7 +9,6 @@ export default function convertToAscii (imageData, options) {
       const r = data[index];
       const g = data[index + 1];
       const b = data[index + 2];
-
       let brightnessPixel = 0.299 * r + 0.587 * g + 0.114 * b;
       // contrast 
       brightnessPixel = (brightnessPixel - 128) * contrast + 128;
