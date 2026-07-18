@@ -2,7 +2,7 @@ import { characterCoverageMap } from "../../lib/characterCoverage";
 import useCharacterExplorerStore from '../../store/characterExplorerStore';
 import './CharacterExplorer.css';
 import { useNavigate } from 'react-router-dom';
-import { getNearestCoverageNeighbor } from "../../lib/characterCoverage";
+import { getNearestCoverageNeighbor, getCharacterTags, getCharacterCategory } from "../../lib/characterCoverage";
 
 export default function CharacterExplorer() {
     const selectedCharacter = useCharacterExplorerStore((state) => state.selectedCharacter);
@@ -20,6 +20,7 @@ export default function CharacterExplorer() {
                         onClick={() => setSelectedCharacter(character)}
                     >
                         {character}
+                        <p className="character-category">{getCharacterCategory(selectedCharacter)}</p>
                     </div>
                 ))}
             </div>
@@ -39,6 +40,7 @@ export function CharacterExplorerPanel() {
             {selectedCharacter && (
                 <div>
                     <p>Selected Character: {selectedCharacter}</p>
+                    <p>Category: {getCharacterCategory(selectedCharacter)}</p>
                     <p>Coverage: {characterCoverageMap[selectedCharacter]?.toFixed(2)}%</p>
                     <p>Nearest Neighbors:</p>
                     {getNearestCoverageNeighbor(selectedCharacter).map((candidate) => (
@@ -47,8 +49,17 @@ export function CharacterExplorerPanel() {
                             className="nearest-neighbor"
                             onClick={() => setSelectedCharacter(candidate.character)}
                         >
-                                {candidate.character} - {candidate.coverage.toFixed(2)}% (Distance: {candidate.distance.toFixed(2)})
+                            {candidate.character} - {candidate.coverage.toFixed(2)}% (Distance: {candidate.distance.toFixed(2)})
                         </p>
+                    ))}
+                    <p>Character Tags:</p>
+                    {getCharacterTags(selectedCharacter).map((tag, index) => (
+                        <span 
+                            key={index} 
+                            className="character-tag"
+                        >
+                            {tag}
+                        </span>
                     ))}
                 </div>
             )}
