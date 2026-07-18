@@ -7,6 +7,31 @@
     border: dashed 2px #6fff8f;
 }
 
+.grid-cell {
+    height: 16px;
+    width: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    line-height: 1;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.grid-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.grid-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    cursor: pointer;
+}
 /*----------------------------------------------------------- PANEL--------------------------------------------------------------------*/
 .drawing-mode-panel {
     display: flex;
