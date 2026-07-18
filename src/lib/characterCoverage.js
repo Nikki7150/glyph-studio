@@ -117,7 +117,6 @@ const maxDensity = Math.max(...allDensityValues);
 const densityRange = maxDensity - minDensity;
 
 export function getCharacterTags(character) {
-    console.log({ minCoverage, maxCoverage, minDensity, maxDensity });
     const coverage = characterCoverageMap[character];
     const { top, bottom, left, right } = characterDensityMap[character];
     const tags = [];

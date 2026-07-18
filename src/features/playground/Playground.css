@@ -46,14 +46,6 @@
     background: #80af8a;
 }
 
-.playground-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    justify-content: center;
-}
-
 .playground-heading {
     margin: 20px
 }
@@ -68,6 +60,14 @@ input[type="range"] {
 }
 
 /*-----------------------------------------------PLAYGROUND PANEL-----------------------------------------------*/
+.playground-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
 .play-panel-heading {
     margin-top: 60px;
     margin-bottom: 20px;
