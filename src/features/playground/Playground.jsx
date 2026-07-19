@@ -3,11 +3,13 @@ import convertToAscii from '../../lib/asciiConverter';
 import './Playground.css'
 
 import { usePlaygroundStore } from '../../store/zustandStores.js';
+import { useImageStore } from '../../store/zustandStores.js';
 import { useNavigate } from 'react-router-dom';
 
 export default function Playground() {
     const [log, setLog] = useState([]);
-    const [imageSrc, setImageSrc] = useState(null);
+    const imageSrc = useImageStore((state) => state.imageSrc);
+    const setImageSrc = useImageStore((state) => state.setImageSrc);
     const width = usePlaygroundStore((state) => state.width);
     const setWidth = usePlaygroundStore((state) => state.setWidth);
     const contrast = usePlaygroundStore((state) => state.contrast);
@@ -50,7 +52,7 @@ export default function Playground() {
                 const canvas = canvasRef.current;
                 canvas.width = width;
                 canvas.height = height;
-                const ctx = canvas.getContext('2d');
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 //setStatus('converting');

@@ -1,14 +1,12 @@
 import { create } from 'zustand';
 
 export const usePlaygroundStore = create((set) => ({
-    // state values — same ones currently in Playground's useState calls
     width: 100,
     contrast: 1,
     brightness: 0,
     invert: false,
     characterSet: 'standard',
 
-    // setter functions — one per value, using `set`
     setWidth: (value) => set({ width: value }),
     setContrast: (value) => set({ contrast: value }),
     setBrightness: (value) => set({ brightness: value }),
@@ -33,3 +31,24 @@ export const useDrawingModeStore = create((set) => ({
     createEmptyGrid: (rows, cols) => Array.from({ length: rows }, () => Array.from({ length: cols }, () => ' ')),
     clearGrid: () => set((state) => ({ grid: state.createEmptyGrid(46, 102) }))
 }));
+
+export const useImageStore = create((set) => ({
+    imageSrc: null,
+    setImageSrc: (src) => set({ imageSrc: src })
+}));
+
+export const useCompareModeStore = create((set) => ({
+    width: 100,
+    contrast: 1,
+    brightness: 0,
+    invert: false,
+    asciiOutput: [],
+    imageUrl: null,
+
+    setWidth: (value) => set({ width: value }),
+    setContrast: (value) => set({ contrast: value }),
+    setBrightness: (value) => set({ brightness: value }),
+    setInvert: (value) => set({ invert: value }),
+    setAsciiOutput: (value) => set({ asciiOutput: value }),
+    setImageUrl: (value) => set({ imageUrl: value })
+}))

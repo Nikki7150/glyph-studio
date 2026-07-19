@@ -2,12 +2,14 @@ import Playground, { PlaygroundPanel } from './features/playground/Playground.js
 import CharacterExplorer, { CharacterExplorerPanel } from './features/character-explorer/CharacterExplorer.jsx';
 import Home, { HomePanel } from './features/home/Home.jsx';
 import DrawingMode, { DrawingModePanel } from './features/drawing-mode/DrawingMode.jsx';
+import CompareMode, { CompareModePanel } from './features/compare-mode/CompareMode.jsx';
 
 const routes = [
     { path: '/', element: <Home />, panel: <HomePanel /> },
     { path: 'playground', element: <Playground />, panel: <PlaygroundPanel /> },
     { path: 'character-explorer', element: <CharacterExplorer />, panel: <CharacterExplorerPanel /> },
-    { path: 'drawing-mode', element: <DrawingMode />, panel: <DrawingModePanel /> }
+    { path: 'drawing-mode', element: <DrawingMode />, panel: <DrawingModePanel /> },
+    { path: 'compare-mode', element: <CompareMode />, panel: <CompareModePanel /> }
 ];
 
 export default routes;

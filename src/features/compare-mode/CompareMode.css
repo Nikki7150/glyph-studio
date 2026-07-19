@@ -1,0 +1,18 @@
+/*----------------------------------------------------------- COMPARE MODE--------------------------------------------------------------------*/
+.compare-mode-heading {
+    margin: 20px
+}
+
+.divider {
+    border: dashed 2px #6fff8f;
+}
+
+.compare-mode-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.compare-image {
+    width: 500px;
+    height: auto;
+}
