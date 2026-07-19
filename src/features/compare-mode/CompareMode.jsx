@@ -20,6 +20,8 @@ export default function CompareMode() {
     const canvasRef = useRef(null);
     const imageUrl = useCompareModeStore((state) => state.imageUrl);
     const setImageUrl = useCompareModeStore((state) => state.setImageUrl);
+    const selectedCell = useCompareModeStore((state) => state.selectedCell);
+    const setSelectedCell = useCompareModeStore((state) => state.setSelectedCell);
 
     const CHARACTER_SETS = {
         standard: '@%#*+=-:.',
@@ -48,9 +50,9 @@ export default function CompareMode() {
                 canvas.height = asciiHeight;
                 const ctx = canvas.getContext('2d', { willReadFrequently: true });
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                setImageData(imageData);
-                const ascii = convertToAscii(imageData, { contrast, brightness, invert, characterSet: CHARACTER_SETS.standard });
+                const freshImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                setImageData(freshImageData);
+                const ascii = convertToAscii(freshImageData, { contrast, brightness, invert, characterSet: CHARACTER_SETS.standard });
                 setAsciiOutput(ascii);
             }
         }
@@ -98,7 +100,7 @@ export default function CompareMode() {
             <canvas ref={canvasRef} style={{ display: 'none' }} />
             {imageUrl && (
                 <div className="compare-mode-content">
-                    <div className="compare-image-box">
+                    <div className="compare-image-box" onClick={() => setSelectedCell(null)}>
                         <img src={imageUrl} alt="Comparison" className="compare-image" />
                     </div>
                     <h1 className="convert">→</h1>
@@ -144,10 +146,31 @@ export function CompareModePanel() {
     const setInvert = useCompareModeStore((state) => state.setInvert);
     const imageUrl = useCompareModeStore((state) => state.imageUrl);
     const setImageUrl = useCompareModeStore((state) => state.setImageUrl);
+    const selectedCell = useCompareModeStore((state) => state.selectedCell);
+    const setSelectedCell = useCompareModeStore((state) => state.setSelectedCell);
     return (
         <div className="compare-mode-panel">
             <button onClick={() => navigate('/')}>Back</button>
-            <h3 className='compare-heading'>Compare Tools</h3>
+            <h3 className='compare-heading text-xl font-bold'>Compare Tools</h3>
+            {selectedCell && (
+                <div className="selected-cell-info">
+                    <p>Row: {selectedCell.row}, Col: {selectedCell.col}</p>
+                    <p>Character: {selectedCell.character}</p>
+                    <p>Brightness: {selectedCell.brightness}</p>
+                </div>
+            )}
+            {!selectedCell && (
+                <div className="no-cell-selected">
+                    <label htmlFor="width">Width: {width}</label>
+                    <input type="range" min="50" max="200" value={width} onChange={(e) => setWidth(parseInt(e.target.value))} />
+                    <label htmlFor="contrast">Contrast: {contrast}</label>
+                    <input type="range" min="0.1" max="2" step="0.1" value={contrast} onChange={(e) => setContrast(parseFloat(e.target.value))} />
+                    <label htmlFor="brightness">Brightness: {brightness}</label>
+                    <input type="range" min="-100" max="100" step="0.1" value={brightness} onChange={(e) => setBrightness(parseFloat(e.target.value))} />
+                    <label htmlFor="invert">Invert: {invert ? 'Yes' : 'No'}</label>
+                    <input type="checkbox" checked={invert} onChange={(e) => setInvert(e.target.checked)} />
+                </div>
+            )}
         </div>
     );
 }
