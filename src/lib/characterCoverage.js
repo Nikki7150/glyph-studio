@@ -28,7 +28,7 @@ function calculateCoverage(character) {
     return (inkPixels / (canvas.width * canvas.height)) * 100;
 }
 
-const characters = [];
+export const characters = [];
 for(let code = 33; code <= 126; code++) {
     characters.push(String.fromCharCode(code));
 }

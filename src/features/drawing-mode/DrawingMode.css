@@ -48,3 +48,36 @@
     border-radius: 10px;
     border: 2px solid rgb(20, 20, 20);
 }
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 5px;
+}
+
+.character-tile {
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', monospace;
+    font-size: 1.4rem;
+    line-height: 1;
+    box-sizing: border-box;
+    user-select: none;
+    border: 1px solid black;
+}
+
+.eraser-button {
+    padding: 10px;
+
+}
+
+.eraser-button.selected {
+    background-color: #6c906e;
+}
+
+.character-tile.selected {
+    background-color: #6c906e;
+}

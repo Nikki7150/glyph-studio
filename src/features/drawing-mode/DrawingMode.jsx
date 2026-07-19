@@ -1,12 +1,14 @@
 import './DrawingMode.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { characters } from "../../lib/characterCoverage";
+import { useDrawingModeStore } from '../../store/zustandStores.js';
+import { FaEraser } from 'react-icons/fa';
 
 export default function DrawingMode() {
-    function createEmptyGrid(rows, cols) {
-        return Array.from({ length: rows }, () => Array.from({ length: cols }, () => ' '));
-    }
-    const [ grid, setGrid ] = useState(() => createEmptyGrid(46, 102));
+    const createEmptyGrid = useDrawingModeStore((state) => state.createEmptyGrid);
+    const grid = useDrawingModeStore((state) => state.grid);
+    const setGrid = useDrawingModeStore((state) => state.setGrid);
     function paintCell(row, col, character) {
         setGrid((prevGrid) => {
             return prevGrid.map((rowArray, rowIndex) => {
@@ -22,7 +24,8 @@ export default function DrawingMode() {
             });
         });
     }
-    const [ selectedCharacter, setSelectedCharacter ] = useState('@');
+    const selectedCharacter = useDrawingModeStore((state) => state.selectedCharacter);
+    const setSelectedCharacter = useDrawingModeStore((state) => state.setSelectedCharacter);
     const [ isDrawing, setIsDrawing ] = useState(false);
     const GridRenderer = ({ gridState }) => {
         return (
@@ -59,11 +62,29 @@ export default function DrawingMode() {
 
 export function DrawingModePanel() {
     const navigate = useNavigate();
+    const selectedCharacter = useDrawingModeStore((state) => state.selectedCharacter);
+    const setSelectedCharacter = useDrawingModeStore((state) => state.setSelectedCharacter);
     return (
         <div className="drawing-mode-panel">
             <button onClick={() => navigate('/')}>Back</button>
-            <h3 className='drawing-heading'>Drawing Mode Panel</h3>
-            <p>This is the panel for the Drawing Mode.</p>
+            <h3 className='drawing-heading'>Drawing Tools</h3>
+            <div className="characters-grid">
+                {characters.map((character) => (
+                    <div 
+                        key={character} 
+                        className={"character-tile" + (selectedCharacter === character ? ' selected' : '')}
+                        onClick={() => setSelectedCharacter(character)}
+                    >
+                        {character}
+                    </div>
+                ))}
+            </div>
+            <button className={"eraser-button" + (selectedCharacter === ' ' ? ' selected' : '')} onClick={() => setSelectedCharacter(' ')}>
+                <FaEraser />
+            </button>
+            <button className="clear-grid-button" onClick={() => confirm('Are you sure you want to clear the grid?') && useDrawingModeStore.getState().clearGrid()}>
+                Clear Grid
+            </button>
         </div>
     );
 }

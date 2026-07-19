@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import convertToAscii from '../../lib/asciiConverter';
 import './Playground.css'
 
-import usePlaygroundStore from '../../store/playgroundStore';
+import { usePlaygroundStore } from '../../store/zustandStores.js';
 import { useNavigate } from 'react-router-dom';
 
 export default function Playground() {

@@ -1,5 +1,5 @@
 import { characterCoverageMap } from "../../lib/characterCoverage";
-import useCharacterExplorerStore from '../../store/characterExplorerStore';
+import { useCharacterExplorerStore } from '../../store/zustandStores.js';
 import './CharacterExplorer.css';
 import { useNavigate } from 'react-router-dom';
 import { getNearestCoverageNeighbor, getCharacterTags, getCharacterCategory } from "../../lib/characterCoverage";
@@ -71,7 +71,7 @@ export default function CharacterExplorer() {
                         </div>
                     );
                 })}
-                </div>
+            </div>
         </div>
     );
 }
