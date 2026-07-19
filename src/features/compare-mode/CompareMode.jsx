@@ -28,6 +28,7 @@ export default function CompareMode() {
     }
 
     const [imageData, setImageData] = useState(null);
+    const [ photoAspectRatio, setPhotoAspectRatio ] = useState(1);
 
     useEffect(() => {
         if (!imageSrc) return;
@@ -36,6 +37,7 @@ export default function CompareMode() {
             img.src = imageSrc;
             img.onload = async () => {
                 const trueHeight = (img.height * width) / img.width;
+                setPhotoAspectRatio(width / trueHeight);
                 const asciiHeight = trueHeight / 2.2;
 
                 const photoCanvas = document.createElement('canvas');
@@ -77,6 +79,7 @@ export default function CompareMode() {
     }, [imageUrl, asciiOutput]);
 
     const numColumns = asciiOutput[0]?.length || 10;
+    const numRows = asciiOutput.length;
     const fontSize = offsetWidth / (numColumns * 0.67);
 
     const handleCharacterClick = (row, col, character) => {
@@ -88,6 +91,23 @@ export default function CompareMode() {
         const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
         setSelectedCell({row, col, character, brightness});
     };
+
+    const imgRef = useRef(null);
+    const [ imgOffsetWidth, setImgOffsetWidth ] = useState(0);
+    const [ imgOffsetHeight, setImgOffsetHeight ] = useState(0);
+
+    useEffect(() => {
+        if (imgRef.current) {
+            setImgOffsetWidth(imgRef.current.offsetWidth);
+            setImgOffsetHeight(imgRef.current.offsetHeight);
+        }
+    }, [imageUrl]);
+
+    const highlightX = (selectedCell?.col / numColumns) * imgOffsetWidth;
+    const highlightY = (selectedCell?.row / numRows) * imgOffsetHeight;
+
+    const cellWidth = imgOffsetWidth / numColumns;
+    const cellHeight = imgOffsetHeight / numRows;
 
     return(
         <div className="compare-mode">
@@ -101,7 +121,8 @@ export default function CompareMode() {
             {imageUrl && (
                 <div className="compare-mode-content">
                     <div className="compare-image-box" onClick={() => setSelectedCell(null)}>
-                        <img src={imageUrl} alt="Comparison" className="compare-image" />
+                        <div className="compare-highlight" style={{ left: `${highlightX}px`, top: `${highlightY}px`, width: `${cellWidth}px`, height: `${cellHeight}px` }}></div>
+                        <img src={imageUrl} alt="Comparison" className="compare-image" ref={imgRef} />
                     </div>
                     <h1 className="convert">→</h1>
                     <div className="compare-ascii-box" ref={divRef}>
@@ -160,7 +181,7 @@ export function CompareModePanel() {
                 </div>
             )}
             {!selectedCell && (
-                <div className="no-cell-selected">
+                <div className="compare-mode-panel-controls">
                     <label htmlFor="width">Width: {width}</label>
                     <input type="range" min="50" max="200" value={width} onChange={(e) => setWidth(parseInt(e.target.value))} />
                     <label htmlFor="contrast">Contrast: {contrast}</label>

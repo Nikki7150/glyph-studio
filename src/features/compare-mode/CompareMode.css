@@ -20,12 +20,19 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    position: relative;
+}
+
+.compare-highlight {
+    position: absolute;
+    border: 2px solid #00ff00;
+    pointer-events: none;
 }
 
 .compare-image {
-    width: 90%;
-    height: 90%;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .compare-ascii {
@@ -96,4 +103,16 @@
     padding: 25px;
     border-radius: 10px;
     border: 2px solid rgb(20, 20, 20);
+}
+
+.compare-mode-panel-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    background-color: #1b1b1b;
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid rgb(20, 20, 20);
+    width: 250px;
 }
