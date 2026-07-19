@@ -26,6 +26,5 @@ export default function convertToAscii (imageData, options) {
     }
     rows.push(row);
   }
-  // returns: array of strings, one per row
   return rows;
 }

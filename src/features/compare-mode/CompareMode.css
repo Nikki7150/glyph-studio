@@ -10,9 +10,73 @@
 .compare-mode-content {
     display: flex;
     flex-direction: row;
+    gap: 10px;
+}
+
+.compare-image-box,
+.compare-ascii-box {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .compare-image {
-    width: 500px;
-    height: auto;
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.compare-ascii {
+    font-size: 6px;
+    line-height: 1;
+    white-space: pre;
+    margin: 0;
+}
+
+.convert {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 3rem;
+}
+
+.upload-box {
+    border: dashed 2px #6fff8f;
+    border-radius: 22px;
+    cursor: pointer;
+    height: 650px;
+    padding: 20px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.compare-nav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 50px;
+}
+
+.new-upload {
+    border: 2px solid rgb(92, 187, 113);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    height: fit-content;
+    margin-top: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.new-upload:hover {
+    background-color: rgb(92, 187, 113);
+    color: black;
 }

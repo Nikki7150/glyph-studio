@@ -44,11 +44,13 @@ export const useCompareModeStore = create((set) => ({
     invert: false,
     asciiOutput: [],
     imageUrl: null,
+    selectedCell: null,
 
     setWidth: (value) => set({ width: value }),
     setContrast: (value) => set({ contrast: value }),
     setBrightness: (value) => set({ brightness: value }),
     setInvert: (value) => set({ invert: value }),
     setAsciiOutput: (value) => set({ asciiOutput: value }),
-    setImageUrl: (value) => set({ imageUrl: value })
+    setImageUrl: (value) => set({ imageUrl: value }),
+    setSelectedCell: (value) => set({ selectedCell: value }),
 }))
