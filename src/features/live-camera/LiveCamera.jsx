@@ -40,8 +40,11 @@ export default function LiveCamera() {
     }, [])
 
     const columns = 800;
+    const isPaused = useLiveCameraStore((state) => state.isPaused);
+    const setIsPaused = useLiveCameraStore((state) => state.setIsPaused);
     useEffect(() => {
         const intervalId = setInterval(() => {
+            if (isPaused) return;
             const video = videoRef.current;
             const canvas = canvasRef.current;
             if (!video || !canvas || video.readyState !== 4) return;
@@ -80,7 +83,7 @@ export default function LiveCamera() {
             <video ref={videoRef} autoPlay style={{ display: 'none' }} />
             <canvas ref={canvasRef} style={{ display: 'none' }} />
             <div className="ascii-output-container" ref={divRef} style={{ fontSize: `${fontSize}px` , lineHeight: `${fontSize * 1.2}px` }}>
-                <pre style={{ whiteSpace: 'pre-wrap' , fontFamily: 'monospace' }}>{asciiOutput.join('\n')}</pre>
+                <pre style={{ whiteSpace: 'pre-wrap' , fontFamily: 'monospace' }}>{isPaused ? capturedAscii.join('\n') : asciiOutput.join('\n')}</pre>
             </div>
         </div>
     );
@@ -105,21 +108,35 @@ export function LiveCameraPanel() {
     const capturedAscii = useLiveCameraStore((state) => state.capturedAscii);
     const setCapturedAscii = useLiveCameraStore((state) => state.setCapturedAscii);
 
-    function downloadAsciiArt() {
-        const text = capturedAscii.join('\n');
-        const blob = new Blob([text], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'ascii-art.txt';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    }
+    const isPaused = useLiveCameraStore((state) => state.isPaused);
+    const setIsPaused = useLiveCameraStore((state) => state.setIsPaused);
+
+    const numColumns = capturedAscii[0]?.length;
+    const numRows = capturedAscii.length;
 
     function exportAsciiArtPng() {
-        // Implementation for exporting ASCII art as PNG
+        const fontSize = 12;
+        const charWidth = fontSize * 0.6;
+        const lineHeight = fontSize * 1.2;
+        const width = numColumns * charWidth;
+        const height = numRows * lineHeight;
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = 'black';
+        ctx.font = `${fontSize}px monospace`;
+
+        capturedAscii.forEach((line, rowIndex) => {
+            ctx.fillText(line, 0, (rowIndex + 1) * lineHeight);
+        });
+
+        const link = document.createElement('a');
+        link.download = 'ascii-art.png';
+        link.href = canvas.toDataURL();
+        link.click();
     }
 
     function copyAsciiToClipboard() {
@@ -150,8 +167,11 @@ export function LiveCameraPanel() {
                     <option value="blocks">Blocks</option>
                 </select>
             </div>
-            <button  className="click-picture-button" onClick={() => {setCapturedAscii(asciiOutput);}}>
+            <button  className="click-picture-button" onClick={() => {setCapturedAscii(asciiOutput); setIsPaused(true);}}>
                 <FaCameraRetro />
+            </button>
+            <button className={ isPaused ? "retake-button enabled" : "retake-button" } onClick={() => { setIsPaused(false); }}>
+                Retake
             </button>
             <button className={ capturedAscii.length > 0 ? "save-button enabled" : "save-button" } onClick={() => setSaveClick(true)}>
                 Save <FaDownload />
@@ -159,7 +179,7 @@ export function LiveCameraPanel() {
             {saveClick && (
                 <div className="save-options">
                     <button className="save-option" onClick={() => { setSaveClick(false); }}>Save to Gallery</button>
-                    <button className="save-option" onClick={() => { setSaveClick(false); downloadAsciiArt(); }}>Download</button>
+                    <button className="save-option" onClick={() => { setSaveClick(false); exportAsciiArtPng(); }}>Download</button>
                     <button className="save-option" onClick={() => { setSaveClick(false); copyAsciiToClipboard(); }}>Copy</button>
                     <button className="save-option" onClick={() => setSaveClick(false)}>Cancel</button>
                 </div>
