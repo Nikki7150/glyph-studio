@@ -4,6 +4,7 @@ import Home, { HomePanel } from './features/home/Home.jsx';
 import DrawingMode, { DrawingModePanel } from './features/drawing-mode/DrawingMode.jsx';
 import CompareMode, { CompareModePanel } from './features/compare-mode/CompareMode.jsx';
 import LiveCamera, { LiveCameraPanel } from './features/live-camera/LiveCamera.jsx';
+import Gallery, { GalleryPanel } from './features/gallery/Gallery.jsx';
 
 const routes = [
     { path: '/', element: <Home />, panel: <HomePanel /> },
@@ -11,7 +12,8 @@ const routes = [
     { path: 'character-explorer', element: <CharacterExplorer />, panel: <CharacterExplorerPanel /> },
     { path: 'drawing-mode', element: <DrawingMode />, panel: <DrawingModePanel /> },
     { path: 'compare-mode', element: <CompareMode />, panel: <CompareModePanel /> },
-    { path: 'live-camera', element: <LiveCamera />, panel: <LiveCameraPanel /> }
+    { path: 'live-camera', element: <LiveCamera />, panel: <LiveCameraPanel /> },
+    { path: 'gallery', element: <Gallery />, panel: <GalleryPanel /> }
 ];
 
 export default routes;

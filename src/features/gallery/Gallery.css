@@ -1,0 +1,27 @@
+/*-------------------------------------------------------- GALLERY.JSX--------------------------------------------------------*/
+
+.gallery-heading {
+    margin: 20px
+}
+
+.divider {
+    border: dashed 2px #6fff8f;
+}
+
+/*-------------------------------------------------------- GALLERY PANEL --------------------------------------------------------*/
+.gallery-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-panel-heading {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    background-color: #1b1b1b;
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid rgb(20, 20, 20);
+}
