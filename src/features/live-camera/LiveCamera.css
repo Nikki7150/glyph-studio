@@ -6,3 +6,10 @@
 .divider {
     border: dashed 2px #6fff8f;
 }
+
+.ascii-output-container {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    text-align: center;
+}

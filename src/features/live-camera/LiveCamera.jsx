@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import convertToAscii from '../../lib/asciiConverter';
 
+
 export default function LiveCamera() {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
@@ -21,21 +22,39 @@ export default function LiveCamera() {
             });
     }, [])
 
+    const columns = 800;
     useEffect(() => {
         const intervalId = setInterval(() => {
             const video = videoRef.current;
             const canvas = canvasRef.current;
             if (!video || !canvas || video.readyState !== 4) return;
+            const aspectCorrectedHeight = Math.floor((video.videoHeight / video.videoWidth) * columns / 2.2);
             const ctx = canvas.getContext('2d');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+            canvas.width = columns;
+            canvas.height = aspectCorrectedHeight;
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const asciiArt = convertToAscii(imageData);
+            const asciiArt = convertToAscii(imageData, {
+                contrast: 1,
+                brightness: 0,
+                invert: false,
+                characterSet: '@%#*+=-:. ',
+            });
             setAsciiOutput(asciiArt);
         }, 150);
         return () => clearInterval(intervalId);
     }, [videoRef, canvasRef]);
+
+    const divRef = useRef(null);
+    const [ offsetWidth, setOffsetWidth ] = useState(0);
+
+    useEffect(() => {
+        if (divRef.current) {
+            setOffsetWidth(divRef.current.offsetWidth);
+        }
+    }, [divRef]);
+
+    const fontSize = offsetWidth / (columns * .656);
 
     return(
         <div className="live-camera">
@@ -43,7 +62,9 @@ export default function LiveCamera() {
             <div className="divider"></div>
             <video ref={videoRef} autoPlay style={{ display: 'none' }} />
             <canvas ref={canvasRef} style={{ display: 'none' }} />
-            <pre>{asciiOutput.join('\n')}</pre>
+            <div className="ascii-output-container" ref={divRef} style={{ fontSize: `${fontSize}px` , lineHeight: `${fontSize * 1.2}px` }}>
+                <pre style={{ whiteSpace: 'pre-wrap' , fontFamily: 'monospace' }}>{asciiOutput.join('\n')}</pre>
+            </div>
         </div>
     );
 }
