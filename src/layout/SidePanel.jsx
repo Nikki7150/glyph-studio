@@ -1,5 +1,5 @@
 import "./Monitor.css";
-import usePlaygroundStore from '../store/playgroundStore';
+import { usePlaygroundStore } from '../store/zustandStores.js';
 import { PlaygroundPanel } from '../features/playground/Playground.jsx';
 import { CharacterExplorerPanel } from '../features/character-explorer/CharacterExplorer.jsx';
 import routes, { isRouteActive } from '../routes.jsx';
