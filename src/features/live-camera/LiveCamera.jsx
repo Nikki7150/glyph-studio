@@ -20,6 +20,8 @@ export default function LiveCamera() {
     const setAsciiOutput = useLiveCameraStore((state) => state.setAsciiOutput);
     const capturedAscii = useLiveCameraStore((state) => state.capturedAscii);
     const setCapturedAscii = useLiveCameraStore((state) => state.setCapturedAscii);
+    const fillColor = useLiveCameraStore((state) => state.fillColor);
+    const setFillColor = useLiveCameraStore((state) => state.setFillColor);
 
     const CHARACTER_SETS = {
         standard: '@%#*+=-:. ',
@@ -114,6 +116,9 @@ export function LiveCameraPanel() {
     const numColumns = capturedAscii[0]?.length;
     const numRows = capturedAscii.length;
 
+    const fillColor = useLiveCameraStore((state) => state.fillColor);
+    const setFillColor = useLiveCameraStore((state) => state.setFillColor);
+
     function exportAsciiArtPng() {
         const fontSize = 12;
         const charWidth = fontSize * 0.6;
@@ -124,9 +129,9 @@ export function LiveCameraPanel() {
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = invert ? 'white' : 'black';
         ctx.fillRect(0, 0, width, height);
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = invert ? 'black' : 'white';
         ctx.font = `${fontSize}px monospace`;
 
         capturedAscii.forEach((line, rowIndex) => {
@@ -153,7 +158,7 @@ export function LiveCameraPanel() {
     return(
         <div className="live-camera-panel">
             <button onClick={() => navigate('/')}>Back</button>
-            <h3 className="live-panel-heading">Live Camera Controls</h3>
+            <h3 className="live-panel-heading text-xl font-bold">Live Camera Controls</h3>
             <div className="live-camera-controls">
                 <label htmlFor="contrast">Contrast: {contrast}</label>
                 <input type="range" min="0.1" max="2" step="0.1" value={contrast} onChange={(e) => setContrast(parseFloat(e.target.value))} />

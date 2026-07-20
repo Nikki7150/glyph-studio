@@ -119,6 +119,9 @@
     /*disabled*/
     opacity: 0.5;
     cursor: not-allowed;
+    position: absolute;
+    bottom: 14%;
+    right: 5%;
 }
 
 .retake-button.enabled {

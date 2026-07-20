@@ -63,6 +63,7 @@ export const useLiveCameraStore = create((set) => ({
     asciiOutput: [],
     capturedAscii: [],
     isPaused: false,
+    fillColor: '#000000',
 
     setContrast: (value) => set({ contrast: value }),
     setBrightness: (value) => set({ brightness: value }),
@@ -71,4 +72,5 @@ export const useLiveCameraStore = create((set) => ({
     setAsciiOutput: (value) => set({ asciiOutput: value }),
     setCapturedAscii: (value) => set({ capturedAscii: value }),
     setIsPaused: (value) => set({ isPaused: value }),
+    setFillColor: (value) => set({ fillColor: value }),
 }));
