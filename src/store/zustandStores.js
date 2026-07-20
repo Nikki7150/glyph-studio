@@ -54,3 +54,19 @@ export const useCompareModeStore = create((set) => ({
     setImageUrl: (value) => set({ imageUrl: value }),
     setSelectedCell: (value) => set({ selectedCell: value }),
 }))
+
+export const useLiveCameraStore = create((set) => ({
+    contrast: 1,
+    brightness: 0,
+    invert: false,
+    characterSet: 'standard',
+    asciiOutput: [],
+    capturedAscii: [],
+
+    setContrast: (value) => set({ contrast: value }),
+    setBrightness: (value) => set({ brightness: value }),
+    setInvert: (value) => set({ invert: value }),
+    setCharacterSet: (value) => set({ characterSet: value }),
+    setAsciiOutput: (value) => set({ asciiOutput: value }),
+    setCapturedAscii: (value) => set({ capturedAscii: value }),
+}));
