@@ -21,6 +21,11 @@ export default function Gallery() {
         setDrawingModeGallery(dm ? JSON.parse(dm) : []);
     }, []);
 
+    function handleDelete(storageKey, id, setStateFn) {
+        const updated = deleteFromGallery(storageKey, id);
+        setStateFn(updated);
+    }
+
     return (
         <div className="gallery">
             <div className="gallery-nav">
@@ -47,12 +52,30 @@ export default function Gallery() {
                 </div>
             </div>
             <div className="divider"></div>
+            <div className="gallery-content">
+                <div className="gallery-grid">
+                    <div className="gallery-grid">
+                        {playgroundGallery.map((item) => (
+                        <div key={item.id} className="gallery-item">
+                            <pre className="gallery-thumbnail">{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
+                            <button 
+                                className="delete-button" 
+                                onClick={() => handleDelete('gallery-playground', item.id, setPlaygroundGallery)}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    ))}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
 
 export function GalleryPanel() {
     const navigate = useNavigate();
+    const [ activeTab, setActiveTab ] = useState('playground');
     return (
         <div className="gallery-panel">
             <button onClick={() => navigate('/')}>Back</button>

@@ -59,6 +59,31 @@ input[type="range"] {
     cursor: pointer;
 }
 
+.playground-nav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 50px;
+}
+
+.new-upload {
+    border: 2px solid rgb(92, 187, 113);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    height: fit-content;
+    margin-top: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.new-upload:hover {
+    background-color: rgb(92, 187, 113);
+    color: black;
+}
+
 /*-----------------------------------------------PLAYGROUND PANEL-----------------------------------------------*/
 .playground-panel {
     display: flex;

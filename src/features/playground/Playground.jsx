@@ -71,7 +71,10 @@ export default function Playground() {
 
     return (
         <div className="playground">
-            <h1 className="playground-heading text-xl font-bold">Playground</h1>
+            <div className="playground-nav">
+                <h1 className="playground-heading text-xl font-bold">Playground</h1>
+                {imageSrc && <button className="new-upload" onClick={() => document.querySelector('.image-file-input').click()}>Change Image</button>}
+            </div>
             <div className="divider"></div>
             <input type="file" onChange={handleFileUpload} className="image-file-input" />
             <canvas ref={canvasRef} style={{ display: 'none' }} />
@@ -182,7 +185,7 @@ export function PlaygroundPanel() {
                             saveToGallery('gallery-playground', 
                             {
                                 id: Date.now(),
-                                ascii: asciiOutput,
+                                asciiOutput: asciiOutput,
                                 settings: { width, contrast, brightness, invert, characterSet },
                                 timestamp: Date.now(),
                             }); 
