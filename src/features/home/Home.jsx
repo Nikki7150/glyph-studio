@@ -113,6 +113,7 @@ export function HomePanel() {
             <h2 className="home-panel-subtitle text-lg font-semibold">CHARACTERS</h2>
             <h2 className="home-panel-characters text-lg font-semibold">95</h2>
             <div className="home-divider"></div>
+            <p className="logo">▊G</p>
         </div>
     );
 }
