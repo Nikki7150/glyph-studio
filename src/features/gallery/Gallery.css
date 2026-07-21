@@ -8,6 +8,33 @@
     border: dashed 2px #6fff8f;
 }
 
+.gallery-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.gallery-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px;
+}
+
+.gallery-tabs button {
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(92, 187, 113);
+    border: 2px solid rgb(20, 20, 20);
+    color: black;
+    padding: 2px;
+}
+
+.active {
+    background-color: rgb(20, 20, 20);
+    color: rgb(92, 187, 113);
+}
+
 /*-------------------------------------------------------- GALLERY PANEL --------------------------------------------------------*/
 .gallery-panel {
     display: flex;

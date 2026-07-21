@@ -16,11 +16,11 @@ export const usePlaygroundStore = create((set) => ({
     setAsciiOutput: (value) => set({ asciiOutput: value }),
 }));
 
+
 export const useCharacterExplorerStore = create((set) => ({
     selectedCharacter: '@',
     setSelectedCharacter: (character) => set({ selectedCharacter: character }),
 }));
-
 
 
 export const useDrawingModeStore = create((set) => ({
@@ -34,10 +34,12 @@ export const useDrawingModeStore = create((set) => ({
     clearGrid: () => set((state) => ({ grid: state.createEmptyGrid(46, 102) }))
 }));
 
+
 export const useImageStore = create((set) => ({
     imageSrc: null,
     setImageSrc: (src) => set({ imageSrc: src })
 }));
+
 
 export const useCompareModeStore = create((set) => ({
     width: 100,
@@ -56,6 +58,7 @@ export const useCompareModeStore = create((set) => ({
     setImageUrl: (value) => set({ imageUrl: value }),
     setSelectedCell: (value) => set({ selectedCell: value }),
 }))
+
 
 export const useLiveCameraStore = create((set) => ({
     contrast: 1,

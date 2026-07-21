@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import convertToAscii from '../../lib/asciiConverter';
 import { useLiveCameraStore } from '../../store/zustandStores.js';
 import { FaCameraRetro, FaDownload } from 'react-icons/fa';
+import { saveToGallery } from '../../lib/galleryStorage.js';
 
 export default function LiveCamera() {
     const videoRef = useRef(null);
@@ -183,7 +184,18 @@ export function LiveCameraPanel() {
             </button>
             {saveClick && (
                 <div className="save-options">
-                    <button className="save-option" onClick={() => { setSaveClick(false); }}>Save to Gallery</button>
+                    <button className="save-option" 
+                        onClick={() => { 
+                            setSaveClick(false); 
+                            saveToGallery('gallery-live-camera', 
+                            {
+                                id: Date.now(),
+                                ascii: capturedAscii,
+                                timestamp: Date.now(),
+                            }); 
+                        }}>
+                        Save to Gallery
+                    </button>
                     <button className="save-option" onClick={() => { setSaveClick(false); exportAsciiArtPng(); }}>Download</button>
                     <button className="save-option" onClick={() => { setSaveClick(false); copyAsciiToClipboard(); }}>Copy</button>
                     <button className="save-option" onClick={() => setSaveClick(false)}>Cancel</button>

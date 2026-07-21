@@ -6,6 +6,7 @@ import { usePlaygroundStore } from '../../store/zustandStores.js';
 import { useImageStore } from '../../store/zustandStores.js';
 import { useNavigate } from 'react-router-dom';
 import { FaDownload } from 'react-icons/fa';
+import { saveToGallery } from '../../lib/galleryStorage.js';
 
 export default function Playground() {
     const [log, setLog] = useState([]);
@@ -175,7 +176,19 @@ export function PlaygroundPanel() {
             </button>
             {saveClick && (
                 <div className="save-options">
-                    <button className="save-option" onClick={() => { setSaveClick(false); }}>Save to Gallery</button>
+                    <button className="save-option" 
+                        onClick={() => { 
+                            setSaveClick(false); 
+                            saveToGallery('gallery-playground', 
+                            {
+                                id: Date.now(),
+                                ascii: asciiOutput,
+                                settings: { width, contrast, brightness, invert, characterSet },
+                                timestamp: Date.now(),
+                            }); 
+                        }}>
+                        Save to Gallery
+                    </button>
                     <button className="save-option" onClick={() => { setSaveClick(false); exportAsciiArtPng(); }}>Download</button>
                     <button className="save-option" onClick={() => { setSaveClick(false); copyAsciiToClipboard(); }}>Copy</button>
                     <button className="save-option" onClick={() => setSaveClick(false)}>Cancel</button>
