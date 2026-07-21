@@ -190,7 +190,8 @@ export function LiveCameraPanel() {
                             saveToGallery('gallery-live-camera', 
                             {
                                 id: Date.now(),
-                                ascii: capturedAscii,
+                                asciiOutput: capturedAscii,
+                                settings: { contrast, brightness, invert, characterSet },
                                 timestamp: Date.now(),
                             }); 
                         }}>

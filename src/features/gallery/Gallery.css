@@ -35,6 +35,24 @@
     color: rgb(92, 187, 113);
 }
 
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-item {
+    border: 5px solid rgb(255, 0, 0);
+    width: fit-content;
+    padding: 10px;
+    background-color: rgb(34, 62, 35);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: fit-content;
+}
+
 /*-------------------------------------------------------- GALLERY PANEL --------------------------------------------------------*/
 .gallery-panel {
     display: flex;

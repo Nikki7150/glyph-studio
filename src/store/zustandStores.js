@@ -79,3 +79,15 @@ export const useLiveCameraStore = create((set) => ({
     setIsPaused: (value) => set({ isPaused: value }),
     setFillColor: (value) => set({ fillColor: value }),
 }));
+
+export const useGalleryStore = create((set) => ({
+    playgroundGallery: [],
+    liveCameraGallery: [],
+    drawingModeGallery: [],
+    selectedItemId: null,
+
+    setPlaygroundGallery: (value) => set({ playgroundGallery: value }),
+    setLiveCameraGallery: (value) => set({ liveCameraGallery: value }),
+    setDrawingModeGallery: (value) => set({ drawingModeGallery: value }),
+    setSelectedItemId: (value) => set({ selectedItemId: value }),
+}));
