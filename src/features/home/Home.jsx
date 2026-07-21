@@ -37,12 +37,13 @@ export default function Home() {
             <div className="nav-bar">
                 <h1 className="text-1xl font-bold">▊ GLYPH STUDIO</h1>
             </div>
+            <div className="divider"></div>
             <div className="home-content">
                 <div className="hero">
                     <pre className="hero-ascii-bg">{heroAscii}</pre>
                     <h1 className="hero-heading text-3xl font-bold">TURN PIXELS INTO ASCII</h1>
-                    <h2>LEARN. EXPERIMENT. <span className="text-purple-500 text-xl">CREATE.</span></h2>
-                    <p className="hero-description">THE interactive ASCII art studio to learn , explore, and create amazing ASCII art.</p>
+                    <h2>LEARN. EXPERIMENT. <span className="create">CREATE.</span></h2>
+                    <p className="hero-description">The interactive ASCII art studio to learn , explore, and create amazing ASCII art.</p>
                 </div>
                 <h3 className="feature-heading text-xl font-bold">## Features</h3>
                 <div className="card-holder">
@@ -102,7 +103,7 @@ export function HomePanel() {
     return (
         <div className="home-panel">
             <h1 className="home-panel-title text-1xl font-bold">▊ GLYPH STUDIO</h1>
-            <div className="divider"></div>
+            <div className="home-divider"></div>
             <h2 className="home-panel-subtitle text-lg font-semibold">USER</h2>
             <h2 className="home-panel-name text-lg font-semibold">Guest</h2>
             <h2 className="home-panel-subtitle text-lg font-semibold">VERSION</h2>
@@ -111,7 +112,7 @@ export function HomePanel() {
             <h2 className="home-panel-artworks text-lg font-semibold">0</h2>
             <h2 className="home-panel-subtitle text-lg font-semibold">CHARACTERS</h2>
             <h2 className="home-panel-characters text-lg font-semibold">95</h2>
-            <div className="divider"></div>
+            <div className="home-divider"></div>
         </div>
     );
 }
