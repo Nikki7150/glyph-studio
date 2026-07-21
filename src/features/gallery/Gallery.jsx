@@ -75,7 +75,7 @@ export default function Gallery() {
                     <div className="gallery-grid">
                         {drawingModeGallery.map((item) => (
                         <div key={item.id} className="gallery-item" onClick={() => setSelectedItemId({storageKey: 'gallery-drawing-mode', item})}>
-                            <pre className="gallery-thumbnail">{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
+                            <pre className="gallery-thumbnail" style={{ fontSize: '5px' }}>{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
                         </div>
                     ))}
                     </div>
