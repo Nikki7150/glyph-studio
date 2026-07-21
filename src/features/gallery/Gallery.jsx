@@ -53,32 +53,44 @@ export default function Gallery() {
             </div>
             <div className="divider"></div>
             <div className="gallery-content">
-                {activeTab === 'playground' && (
-                    <div className="gallery-grid">
-                        {playgroundGallery.map((item) => (
-                        <div key={item.id} className="gallery-item" onClick={() => setSelectedItemId({storageKey: 'gallery-playground', item})}>
-                            <pre className="gallery-thumbnail" style={{ fontSize: '5px' }}>{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
-                        </div>
-                    ))}
+                {selectedItemId ? (
+                    <div className="gallery-preview">
+                        <button className="close-button" onClick={() => setSelectedItemId(null)}>X</button>
+                        <pre className="gallery-preview-ascii" 
+                            style={{ fontSize: selectedItemId.storageKey === 'gallery-live-camera' ? '1.5px' : '15px' }}>
+                            {selectedItemId.item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}
+                        </pre>
                     </div>
-                )}
-                {activeTab === 'live-camera' && (
-                    <div className="gallery-grid">
-                        {liveCameraGallery.map((item) => (
-                        <div key={item.id} className="gallery-item" onClick={() => setSelectedItemId({storageKey: 'gallery-live-camera', item})}>
-                            <pre className="gallery-thumbnail" style={{ fontSize: '1px' }}>{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
-                        </div>
-                    ))}
-                    </div>
-                )}
-                {activeTab === 'drawing-mode' && (
-                    <div className="gallery-grid">
-                        {drawingModeGallery.map((item) => (
-                        <div key={item.id} className="gallery-item" onClick={() => setSelectedItemId({storageKey: 'gallery-drawing-mode', item})}>
-                            <pre className="gallery-thumbnail" style={{ fontSize: '5px' }}>{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
-                        </div>
-                    ))}
-                    </div>
+                ) : (
+                    <>
+                        {activeTab === 'playground' && (
+                            <div className="gallery-grid">
+                                {playgroundGallery.map((item) => (
+                                <div key={item.id} className="gallery-item" onClick={() => setSelectedItemId({storageKey: 'gallery-playground', item})}>
+                                    <pre className="gallery-thumbnail" style={{ fontSize: '5px' }}>{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
+                                </div>
+                            ))}
+                            </div>
+                        )}
+                        {activeTab === 'live-camera' && (
+                            <div className="gallery-grid">
+                                {liveCameraGallery.map((item) => (
+                                <div key={item.id} className="gallery-item" onClick={() => setSelectedItemId({storageKey: 'gallery-live-camera', item})}>
+                                    <pre className="gallery-thumbnail" style={{ fontSize: '1px' }}>{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
+                                </div>
+                            ))}
+                            </div>
+                        )}
+                        {activeTab === 'drawing-mode' && (
+                            <div className="gallery-grid">
+                                {drawingModeGallery.map((item) => (
+                                <div key={item.id} className="gallery-item" onClick={() => setSelectedItemId({storageKey: 'gallery-drawing-mode', item})}>
+                                    <pre className="gallery-thumbnail" style={{ fontSize: '5px' }}>{item.asciiOutput?.join('\n') ?? 'Corrupted Artwork'}</pre>
+                                </div>
+                            ))}
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>
@@ -103,7 +115,7 @@ export function GalleryPanel() {
 
     return (
         <div className="gallery-panel">
-            <button onClick={() => navigate('/')}>Back</button>
+            <button onClick={() => {navigate('/'); setSelectedItemId(null);}}>Back</button>
             <h2 className="gallery-panel-heading text-xl font-bold">Gallery Settings</h2>
             <div className="gallery-panel-controls">
                 {selectedItemId && (

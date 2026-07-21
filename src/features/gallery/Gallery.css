@@ -43,7 +43,7 @@
 }
 
 .gallery-item {
-    border: 5px solid rgb(255, 0, 0);
+    border: 5px solid rgb(0, 106, 12);
     width: 100%; /* fill the grid column, not just wrap around content */
     max-height: 250px; /* cap vertical size too, since rows can be numerous */
     padding: 10px;
@@ -60,6 +60,28 @@
     width: 100%;
     overflow: hidden;
     margin: 0;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 106, 12);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.gallery-preview {
+    position: relative;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgb(34, 62, 35);
+    border: 5px solid rgb(0, 106, 12);
+    overflow: auto;
 }
 
 /*-------------------------------------------------------- GALLERY PANEL --------------------------------------------------------*/
