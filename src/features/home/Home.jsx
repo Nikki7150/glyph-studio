@@ -40,8 +40,9 @@ export default function Home() {
             <div className="home-content">
                 <div className="hero">
                     <pre className="hero-ascii-bg">{heroAscii}</pre>
-                    <h2>LEARN. EXPERIMENT. CREATE.</h2>
-                    <p>This is the home page content.</p>
+                    <h1 className="hero-heading text-3xl font-bold">TURN PIXELS INTO ASCII</h1>
+                    <h2>LEARN. EXPERIMENT. <span className="text-purple-500 text-xl">CREATE.</span></h2>
+                    <p className="hero-description">THE interactive ASCII art studio to learn , explore, and create amazing ASCII art.</p>
                 </div>
                 <h3 className="feature-heading text-xl font-bold">## Features</h3>
                 <div className="card-holder">
@@ -97,4 +98,20 @@ export default function Home() {
     );
 }
 
-export function HomePanel() {}
+export function HomePanel() {
+    return (
+        <div className="home-panel">
+            <h1 className="home-panel-title text-1xl font-bold">▊ GLYPH STUDIO</h1>
+            <div className="divider"></div>
+            <h2 className="home-panel-subtitle text-lg font-semibold">USER</h2>
+            <h2 className="home-panel-name text-lg font-semibold">Guest</h2>
+            <h2 className="home-panel-subtitle text-lg font-semibold">VERSION</h2>
+            <h2 className="home-panel-version text-lg font-semibold">1.0.0</h2>
+            <h2 className="home-panel-subtitle text-lg font-semibold">ARTWORKS</h2>
+            <h2 className="home-panel-artworks text-lg font-semibold">0</h2>
+            <h2 className="home-panel-subtitle text-lg font-semibold">CHARACTERS</h2>
+            <h2 className="home-panel-characters text-lg font-semibold">95</h2>
+            <div className="divider"></div>
+        </div>
+    );
+}

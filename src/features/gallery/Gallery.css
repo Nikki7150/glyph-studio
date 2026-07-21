@@ -44,13 +44,22 @@
 
 .gallery-item {
     border: 5px solid rgb(255, 0, 0);
-    width: fit-content;
+    width: 100%; /* fill the grid column, not just wrap around content */
+    max-height: 250px; /* cap vertical size too, since rows can be numerous */
     padding: 10px;
     background-color: rgb(34, 62, 35);
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: fit-content;
+    overflow: hidden; /* clip anything that doesn't fit, instead of spilling out */
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.gallery-thumbnail {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
 }
 
 /*-------------------------------------------------------- GALLERY PANEL --------------------------------------------------------*/
