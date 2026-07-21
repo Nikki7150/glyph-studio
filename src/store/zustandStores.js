@@ -6,12 +6,14 @@ export const usePlaygroundStore = create((set) => ({
     brightness: 0,
     invert: false,
     characterSet: 'standard',
+    asciiOutput: [],
 
     setWidth: (value) => set({ width: value }),
     setContrast: (value) => set({ contrast: value }),
     setBrightness: (value) => set({ brightness: value }),
     setInvert: (value) => set({ invert: value }),
     setCharacterSet: (value) => set({ characterSet: value }),
+    setAsciiOutput: (value) => set({ asciiOutput: value }),
 }));
 
 export const useCharacterExplorerStore = create((set) => ({

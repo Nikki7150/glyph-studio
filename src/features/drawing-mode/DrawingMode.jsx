@@ -67,7 +67,7 @@ export function DrawingModePanel() {
     return (
         <div className="drawing-mode-panel">
             <button onClick={() => navigate('/')}>Back</button>
-            <h3 className='drawing-heading'>Drawing Tools</h3>
+            <h3 className='drawing-heading text-xl font-bold'>Drawing Tools</h3>
             <div className="characters-grid">
                 {characters.map((character) => (
                     <div 

@@ -5,6 +5,7 @@ import './Playground.css'
 import { usePlaygroundStore } from '../../store/zustandStores.js';
 import { useImageStore } from '../../store/zustandStores.js';
 import { useNavigate } from 'react-router-dom';
+import { FaDownload } from 'react-icons/fa';
 
 export default function Playground() {
     const [log, setLog] = useState([]);
@@ -20,7 +21,8 @@ export default function Playground() {
     const setInvert = usePlaygroundStore((state) => state.setInvert);
     const characterSet = usePlaygroundStore((state) => state.characterSet);
     const setCharacterSet = usePlaygroundStore((state) => state.setCharacterSet);
-    const [asciiOutput, setAsciiOutput] = useState([]);
+    const asciiOutput = usePlaygroundStore((state) => state.asciiOutput);
+    const setAsciiOutput = usePlaygroundStore((state) => state.setAsciiOutput);
 
     const canvasRef = useRef(null);
 
@@ -42,7 +44,6 @@ export default function Playground() {
     useEffect(() => {
         if (!imageSrc) return;
         const processImage = async () => {
-            //setStatus('gathering');
             setLog((prev) => [...prev, 'Gathering image data...'])
             await delay(500);
             const img = new Image();
@@ -55,15 +56,12 @@ export default function Playground() {
                 const ctx = canvas.getContext('2d', { willReadFrequently: true });
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                //setStatus('converting');
                 setLog((prev) => [...prev, 'Converting to ASCII...'])
                 await delay(500);
                 const ascii = convertToAscii(imageData, { contrast, brightness, invert, characterSet: CHARACTER_SETS[characterSet] });
-                //setStatus('rendering');
                 setLog((prev) => [...prev, 'Rendering output...'])
                 await delay(300);
                 setAsciiOutput(ascii);
-                //setStatus('done');
                 setLog((prev) => [...prev, 'Loaded Output.'])
             }
         }
@@ -110,6 +108,48 @@ export function PlaygroundPanel() {
     const characterSet = usePlaygroundStore((state) => state.characterSet);
     const setCharacterSet = usePlaygroundStore((state) => state.setCharacterSet);
     const navigate = useNavigate();
+    const asciiOutput = usePlaygroundStore((state) => state.asciiOutput);
+    const setAsciiOutput = usePlaygroundStore((state) => state.setAsciiOutput);
+    const [ saveClick, setSaveClick ] = useState(false);
+
+    const numColumns = asciiOutput[0]?.length;
+    const numRows = asciiOutput.length;
+
+    function exportAsciiArtPng() {
+        const fontSize = 12;
+        const charWidth = fontSize * 0.6;
+        const lineHeight = fontSize * 1.2;
+        const width = numColumns * charWidth;
+        const height = numRows * lineHeight;
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = invert ? 'white' : 'black';
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = invert ? 'black' : 'white';
+        ctx.font = `${fontSize}px monospace`;
+
+        asciiOutput.forEach((line, rowIndex) => {
+            ctx.fillText(line, 0, (rowIndex + 1) * lineHeight);
+        });
+
+        const link = document.createElement('a');
+        link.download = 'ascii-art.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    function copyAsciiToClipboard() {
+        const text = asciiOutput.join('\n');
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert('ASCII art copied to clipboard!');
+            })
+            .catch((err) => {
+                console.error('Failed to copy ASCII art: ', err);
+            });
+    }
 
     return (
         <div className="playground-panel">
@@ -130,6 +170,17 @@ export function PlaygroundPanel() {
                     <option value="blocks">Blocks</option>
                 </select>
             </div>
+            <button className={ asciiOutput.length > 0 ? "save-button enabled" : "save-button" } onClick={() => setSaveClick(true)}>
+                Save <FaDownload />
+            </button>
+            {saveClick && (
+                <div className="save-options">
+                    <button className="save-option" onClick={() => { setSaveClick(false); }}>Save to Gallery</button>
+                    <button className="save-option" onClick={() => { setSaveClick(false); exportAsciiArtPng(); }}>Download</button>
+                    <button className="save-option" onClick={() => { setSaveClick(false); copyAsciiToClipboard(); }}>Copy</button>
+                    <button className="save-option" onClick={() => setSaveClick(false)}>Cancel</button>
+                </div>
+            )}
         </div>
     );
 }
