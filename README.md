@@ -82,3 +82,36 @@ I had a lot of fun making this project. I'm very proud of it because it had a lo
 - pull gallery artwork into playground to change settings
 - add login with username
 - add leaderboards and learning lessons to create code for ascii converter
+
+## How to setup locally
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- npm (comes bundled with Node.js)
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/Nikki7150/glyph-studio.git
+   cd glyph-studio
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+
+3. Start the development server
+   ```bash
+   npm run dev
+   ```
+
+4. Open the app
+   
+   Vite will print a local URL in your terminal (usually `http://localhost:5173`). Open it in your browser.
+
+### Notes
+
+- **Camera access**: Live Camera mode requires browser permission for your webcam. Most browsers only allow camera access over `https://` or on `localhost` — this shouldn't be an issue running locally, but keep it in mind if you deploy elsewhere.
+- **Gallery persistence**: Saved artwork is stored in your browser's `localStorage`, scoped per-browser/per-device. Clearing your browser data will clear the gallery.
