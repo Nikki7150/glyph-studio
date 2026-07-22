@@ -122,7 +122,13 @@ export default function CompareMode() {
                 <div className="compare-mode-content">
                     <div className="compare-image-box" onClick={() => setSelectedCell(null)}>
                         <div className="compare-highlight" style={{ left: `${highlightX}px`, top: `${highlightY}px`, width: `${cellWidth}px`, height: `${cellHeight}px` }}></div>
-                        <img src={imageUrl} alt="Comparison" className="compare-image" ref={imgRef} />
+                        <img src={imageUrl} alt="Comparison" className="compare-image" ref={imgRef} 
+                            onLoad={() => {
+                                if (imgRef.current) {
+                                    setImgOffsetWidth(imgRef.current.offsetWidth);
+                                    setImgOffsetHeight(imgRef.current.offsetHeight);
+                                }
+                            }}/>
                     </div>
                     <h1 className="convert">→</h1>
                     <div className="compare-ascii-box" ref={divRef}>
