@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import convertToAscii from '../../lib/asciiConverter';
 import { useGalleryStore } from '../../store/zustandStores.js';
-import { FaCameraRetro, FaDownload } from 'react-icons/fa';
+import { FaCameraRetro, FaDownload, FaTrash } from 'react-icons/fa';
 import { saveToGallery, deleteFromGallery } from '../../lib/galleryStorage.js';
 
 export default function Gallery() {
@@ -33,19 +33,19 @@ export default function Gallery() {
                 <div className="gallery-tabs">
                     <button 
                         className={activeTab === 'playground' ? 'active' : ''}
-                        onClick={() => setActiveTab('playground')}
+                        onClick={() => {setActiveTab('playground'); setSelectedItemId(null);}}
                     >
                         Playground
                     </button>
                     <button 
                         className={activeTab === 'live-camera' ? 'active' : ''}
-                        onClick={() => setActiveTab('live-camera')}
+                        onClick={() => {setActiveTab('live-camera'); setSelectedItemId(null);}}
                     >
                         Live Camera
                     </button>
                     <button 
                         className={activeTab === 'drawing-mode' ? 'active' : ''}
-                        onClick={() => setActiveTab('drawing-mode')}
+                        onClick={() => {setActiveTab('drawing-mode'); setSelectedItemId(null);}}
                     >
                         Drawing Mode
                     </button>
@@ -108,9 +108,53 @@ export function GalleryPanel() {
     const selectedItemId = useGalleryStore((state) => state.selectedItemId);
     const setSelectedItemId = useGalleryStore((state) => state.setSelectedItemId);
 
+    const [ saveClick, setSaveClick ] = useState(false);
+
     function handleDelete(storageKey, id, setStateFn) {
         const updated = deleteFromGallery(storageKey, id);
         setStateFn(updated);
+    }
+
+    function exportAsciiArtPng() {
+        const asciiOutput = selectedItemId.item.asciiOutput;
+        const numColumns = asciiOutput[0]?.length;
+        const numRows = asciiOutput.length;
+        const invert = selectedItemId.item.settings?.invert ?? false;
+
+        const fontSize = 12;
+        const charWidth = fontSize * 0.6;
+        const lineHeight = fontSize * 1.2;
+        const width = numColumns * charWidth;
+        const height = numRows * lineHeight;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = invert ? 'white' : 'black';
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = invert ? 'black' : 'white';
+        ctx.font = `${fontSize}px monospace`;
+
+        asciiOutput.forEach((line, rowIndex) => {
+            ctx.fillText(line, 0, (rowIndex + 1) * lineHeight);
+        });
+
+        const link = document.createElement('a');
+        link.download = 'ascii-art.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    function copyAsciiToClipboard() {
+        const text = selectedItemId.item.asciiOutput.join('\n');
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert('ASCII art copied to clipboard!');
+            })
+            .catch((err) => {
+                console.error('Failed to copy ASCII art: ', err);
+            });
     }
 
     return (
@@ -157,8 +201,18 @@ export function GalleryPanel() {
                             }
                             setSelectedItemId(null);
                         }}>
-                            Delete Selected Item
+                            <FaTrash />
                         </button>
+                        <button className="save-button" onClick={() => setSaveClick(true)}>
+                            Save <FaDownload />
+                        </button>
+                        {saveClick && (
+                            <div className="save-options">
+                                <button className="save-option" onClick={() => { setSaveClick(false); exportAsciiArtPng(); }}>Download</button>
+                                <button className="save-option" onClick={() => { setSaveClick(false); copyAsciiToClipboard(); }}>Copy</button>
+                                <button className="save-option" onClick={() => setSaveClick(false)}>Cancel</button>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
